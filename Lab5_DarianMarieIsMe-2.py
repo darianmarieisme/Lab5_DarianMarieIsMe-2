@@ -10,18 +10,20 @@ wins
 
 sticks = 13
 
-min = 1
+sticksmin = 1
 
-max = 4
+sticksmax = 4
 
 player1_turn = True
 
 value_error = True
 
+invalid_print = "This is an invalid value. Please try again."
+
 #game instructions
 
 print("Welcome to Pick Up Sticks.\nThis game is for 2 players. \nEach player will",
-      f"take turns picking up from\n{min} to {max} sticks from a pile of 13 sticks.",
+      f"take turns picking up from\n{sticksmin} to {sticksmax} sticks from a pile of 13 sticks.",
       "\nWhoever picks up the last stick wins!")
 
 while sticks > 0:
@@ -29,11 +31,20 @@ while sticks > 0:
         print("It is player 1's turn!"
               ,"\nEnter the amount of sticks you want to pick up.")
         while value_error:
-             player1 = int(input(f"The value can only be between {min} and {max}."))
-             if not (1 <= player1 <= 4):
-                print("This is an invalid value. Please try again.")
+             sticks_in_turn_amount = int(input(f"The value can only be between {sticksmin} and {sticksmax}."))
+             if not (1 <= sticks_in_turn_amount <= 4):
+                print(invalid_print)
              else:
-                 sticks = sticks - player1
-                 print(f"There are {sticks} left.")
+                 sticks = sticks - sticks_in_turn_amount
+                 print(f"There are {sticks} sticks left.")
+                 player1_turn = False
                  value_error = False
-            
+    else:
+        print("It is player 2's turn!"
+              ,"Enter the amount of sticks you want to pick up.")
+        value_error = True
+        while value_error: 
+            sticks_in_turn_amount = int(input(f"The value can only be between {sticksmin} and {sticksmax}."))
+            if not (1 <= sticks_in_turn_amount <= 4):
+                print(invalid_print)
+
