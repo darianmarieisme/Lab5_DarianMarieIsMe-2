@@ -22,8 +22,6 @@ input_instructions = "\nEnter the amount of sticks you want to pick up."
 
 valid_input_instructions = f"The value can only be between {sticksmin} and {sticksmax}."
 
-sticks_left = f"There are {sticks} sticks left."
-
 #game instructions
 
 print("Welcome to Pick Up Sticks.\nThis game is for 2 players. \nEach player will",
@@ -36,11 +34,11 @@ while sticks > 0:
         print("It is player 1's turn!", input_instructions)
         while value_error:
              sticks_in_turn_amount = int(input(valid_input_instructions))
-             if not (1 <= sticks_in_turn_amount <= 4 and sticks_in_turn_amount >= sticks):
+             if not (1 <= sticks_in_turn_amount <= 4 and sticks_in_turn_amount <= sticks):
                 print(invalid_print)
              else:
                  sticks = sticks - sticks_in_turn_amount
-                 print(sticks_left)
+                 print(f"There are {sticks} sticks left.")
                  player1_turn = False
                  value_error = False
     else:
@@ -48,11 +46,15 @@ while sticks > 0:
         value_error = True
         while value_error: 
             sticks_in_turn_amount = int(input(valid_input_instructions))
-            if not (1 <= sticks_in_turn_amount <= 4 and sticks_in_turn_amount >= sticks):
+            if not (1 <= sticks_in_turn_amount <= 4 and sticks_in_turn_amount <= sticks):
                 print(invalid_print)
             else:
                 sticks = sticks - sticks_in_turn_amount
-                print(sticks_left)
+                print(f"There are {sticks} sticks left.")
                 value_error = False
                 player1_turn = True
 
+if player1_turn:
+    print("Congratulations, Player 2, you have won the game!")
+else:
+    print("Congratulations, Player 1, you have won the game!")
